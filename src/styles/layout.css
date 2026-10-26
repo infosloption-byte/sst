@@ -1,0 +1,231 @@
+/* ---------- Header & navigation ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgb(10 10 11 / 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: var(--header-h);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.brand img {
+  height: 48px;
+  width: auto;
+}
+
+.nav-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+.nav-toggle:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Mobile & tablet: a drop-down panel under the header. */
+.primary-nav {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: calc(100vh - var(--header-h));
+  max-height: calc(100dvh - var(--header-h));
+  overflow-y: auto;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.primary-nav.is-open {
+  display: block;
+  animation: nav-in 0.25s var(--ease);
+}
+
+@keyframes nav-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+}
+
+.primary-nav ul {
+  display: grid;
+  list-style: none;
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding: 0.5rem var(--gutter) 1.5rem;
+}
+
+.primary-nav a {
+  display: block;
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.primary-nav a:hover,
+.primary-nav a.is-active {
+  color: var(--color-accent);
+}
+
+@media (min-width: 1024px) {
+  .nav-toggle {
+    display: none;
+  }
+
+  .primary-nav {
+    display: block;
+    position: static;
+    max-height: none;
+    overflow: visible;
+    background: none;
+    border: 0;
+    animation: none;
+  }
+
+  .primary-nav ul {
+    display: flex;
+    gap: 0.25rem;
+    padding: 0;
+    max-width: none;
+  }
+
+  .primary-nav a {
+    padding: 0.55rem 0.95rem;
+    border: 0;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+  }
+
+  .primary-nav a:hover {
+    background: var(--color-surface-2);
+  }
+
+  .primary-nav a.is-active {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  margin-top: 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+}
+
+.footer-reels {
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.footer-reels__title {
+  margin-bottom: 1.5rem;
+  font-size: clamp(1.3rem, 3vw, 1.75rem);
+  text-align: center;
+}
+
+.footer-grid {
+  display: grid;
+  gap: 2.25rem;
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+}
+
+@media (min-width: 640px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1.3fr 1fr 1.1fr 0.7fr;
+    gap: 3rem;
+  }
+}
+
+.footer-col--brand p {
+  max-width: 30ch;
+  margin-block: 1rem;
+  color: var(--color-muted);
+}
+
+.footer-title {
+  margin-bottom: 1.1rem;
+  font-size: 1.15rem;
+}
+
+.footer-links {
+  display: grid;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.footer-links a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: var(--color-accent);
+}
+
+.footer-bottom {
+  padding-block: 1.25rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+/* ---------- Floating WhatsApp button ---------- */
+.whatsapp-float {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--color-whatsapp);
+  color: #fff;
+  font-size: 1.9rem;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.5);
+  transition: transform 0.2s var(--ease);
+}
+
+.whatsapp-float:hover {
+  color: #fff;
+  transform: scale(1.08);
+}
