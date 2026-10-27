@@ -1,8 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
-import '@fontsource-variable/inter'
-import '@fontsource-variable/playfair-display'
-import '@/styles/index.css'
+import '@/styles/app.css'
 import { App } from '@/App'
 import { BrowserRouter } from '@/router'
 

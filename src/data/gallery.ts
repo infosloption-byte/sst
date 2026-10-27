@@ -1,18 +1,15 @@
 /**
- * Gallery media. Paths are relative to the site root (the same paths the
- * Laravel site used) and are resolved through asset().
- *
- * To add or change work, edit these lists - nothing else needs to change.
+ * Gallery media, in the same order as the original site. Paths are relative to
+ * public/assets/front/images (see lib/assets.ts). Edit these lists to add or
+ * change work - nothing else needs to change.
  */
 export interface GalleryItem {
   id: string
-  /** Thumbnail / poster image. */
+  /** Thumbnail image (also the video poster). */
   image: string
-  /** Larger image shown in the lightbox (defaults to `image`). */
-  full?: string
-  /** If set, the lightbox plays this video. */
+  /** Set for video clips; the lightbox plays it. */
   video?: string
-  /** Describe the artwork - used as alt text for accessibility and image SEO. */
+  /** Describes the artwork: used as alt text (accessibility + image SEO). */
   alt: string
 }
 
@@ -21,39 +18,46 @@ const range = (from: number, to: number): number[] =>
 
 const clip = (n: number): GalleryItem => ({
   id: `clip-${n}`,
-  image: `/images/${n}.jpeg`,
-  video: `/assets/front/images/sst/videos/v${n}.mp4`,
-  alt: `Tattoo work by Southern Star Tattoo, Hikkaduwa - video clip ${n}`,
+  image: `sst/videos/${n}.jpeg`,
+  video: `sst/videos/v${n}.mp4`,
+  alt: `Tattoo work video clip ${n} - Southern Star Tattoo, Hikkaduwa`,
 })
 
-/** Home page "Few pieces of our work" (images 1-12 with videos). */
+/** Home page "Few pieces of our work" (clips 1-12). */
 export const featuredWork: GalleryItem[] = range(1, 12).map(clip)
 
-/** Short clips shown above the footer on every page (images 13-18). */
+/** "Follow @southernstartattoo_" strip shown on every page (clips 13-18). */
 export const reels: GalleryItem[] = range(13, 18).map(clip)
 
-const STYLE_FILES = [
-  '/images/tattoo-01.png',
-  '/images/tattoo-02_1.png',
-  '/images/tattoo-03.png',
-  '/images/tattoo-04_1.png',
-  '/images/tattoo-05_1.png',
-  '/images/tattoo-06_1.png',
-  '/images/tattoo-07.png',
-  '/images/tattoo-08.png',
-]
-
-/** Home page "Any Style. Any Length" gallery. */
-export const styleGallery: GalleryItem[] = STYLE_FILES.map((image, i) => ({
-  id: `style-${i + 1}`,
-  image,
-  // Full-size versions exist for the first seven; the eighth uses its thumbnail.
-  full: i < 7 ? `/assets/front/images/gallery/tattoo-0${i + 1}.png` : image,
-  alt: `Tattoo design ${i + 1} by Southern Star Tattoo, Hikkaduwa`,
+/** Home page "Any Style. Any Length". */
+export const styleGallery: GalleryItem[] = range(1, 8).map((n) => ({
+  id: `style-${n}`,
+  image: `gallery/tattoo-0${n}.png`,
+  alt: `Custom tattoo design ${n} by Southern Star Tattoo, Hikkaduwa`,
 }))
 
-/** Tattoo page portfolio. */
-export const tattooPortfolio: GalleryItem[] = [...styleGallery, ...featuredWork]
+const STYLES = [
+  { slug: 'blackgray', label: 'Black and grey' },
+  { slug: 'colored', label: 'Colour' },
+  { slug: 'dotwork', label: 'Dotwork' },
+  { slug: 'maori', label: 'Maori-style' },
+] as const
 
-/** Piercing page portfolio. Add items here as piercing photos become available. */
-export const piercingPortfolio: GalleryItem[] = []
+/** Tattoo page: 9 photos for each of four styles. */
+export const tattooPortfolio: GalleryItem[] = STYLES.flatMap(({ slug, label }) =>
+  range(1, 9).map((n) => ({
+    id: `${slug}-${n}`,
+    image: `sst/tattoo/${slug}-${n}.jpg`,
+    alt: `${label} tattoo ${n} by Southern Star Tattoo, Hikkaduwa`,
+  })),
+)
+
+/** Piercing page: photos 1-10; three of them open a video clip instead. */
+const PIERCING_VIDEOS: Record<number, string> = { 5: 'v5', 7: 'v3', 10: 'v4' }
+
+export const piercingPortfolio: GalleryItem[] = range(1, 10).map((n) => ({
+  id: `piercing-${n}`,
+  image: `sst/piercing/${n}.jpeg`,
+  video: PIERCING_VIDEOS[n] ? `sst/piercing/${PIERCING_VIDEOS[n]}.mp4` : undefined,
+  alt: `Piercing work ${n} - Southern Star Tattoo, Hikkaduwa`,
+}))

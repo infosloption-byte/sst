@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react'
 import type { KeyboardEvent } from 'react'
-import { FaChevronLeft, FaChevronRight, FaXmark } from 'react-icons/fa6'
-import { asset } from '@/lib/assets'
+import { media } from '@/lib/assets'
 import type { GalleryItem } from '@/data/gallery'
 
 interface LightboxProps {
@@ -12,7 +11,7 @@ interface LightboxProps {
   onIndexChange: (index: number) => void
 }
 
-/** Modal viewer built on the native <dialog> (focus trap, Esc to close). Plays video clips. */
+/** Full-screen viewer for gallery photos and video clips (native <dialog>: focus trap, Esc to close). */
 export function Lightbox({ items, index, onClose, onIndexChange }: LightboxProps) {
   const ref = useRef<HTMLDialogElement>(null)
   const item = index === null ? null : items[index]
@@ -37,7 +36,7 @@ export function Lightbox({ items, index, onClose, onIndexChange }: LightboxProps
   return (
     <dialog
       ref={ref}
-      className="lightbox"
+      className="sst-lightbox"
       aria-label="Gallery viewer"
       onClose={onClose}
       onKeyDown={onKeyDown}
@@ -46,48 +45,43 @@ export function Lightbox({ items, index, onClose, onIndexChange }: LightboxProps
       }}
     >
       {item && (
-        <div className="lightbox__body">
-          <button type="button" className="lightbox__close" onClick={onClose} aria-label="Close">
-            <FaXmark aria-hidden="true" />
+        <div className="sst-lightbox__body">
+          <button type="button" className="sst-lightbox__btn sst-lightbox__close" onClick={onClose} aria-label="Close">
+            &times;
           </button>
           {items.length > 1 && (
             <>
               <button
                 type="button"
-                className="lightbox__nav lightbox__nav--prev"
+                className="sst-lightbox__btn sst-lightbox__nav sst-lightbox__prev"
                 onClick={() => step(-1)}
                 aria-label="Previous"
               >
-                <FaChevronLeft aria-hidden="true" />
+                &#8249;
               </button>
               <button
                 type="button"
-                className="lightbox__nav lightbox__nav--next"
+                className="sst-lightbox__btn sst-lightbox__nav sst-lightbox__next"
                 onClick={() => step(1)}
                 aria-label="Next"
               >
-                <FaChevronRight aria-hidden="true" />
+                &#8250;
               </button>
             </>
           )}
           {item.video ? (
             <video
               key={item.video}
-              className="lightbox__media"
-              src={asset(item.video)}
-              poster={asset(item.image)}
+              className="sst-lightbox__media"
+              src={media(item.video)}
+              poster={media(item.image)}
               controls
               autoPlay
               playsInline
               preload="metadata"
             />
           ) : (
-            <img
-              key={item.id}
-              className="lightbox__media"
-              src={asset(item.full ?? item.image)}
-              alt={item.alt}
-            />
+            <img key={item.id} className="sst-lightbox__media" src={media(item.image)} alt={item.alt} />
           )}
         </div>
       )}

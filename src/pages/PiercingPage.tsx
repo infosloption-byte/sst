@@ -1,45 +1,45 @@
-import { FaWhatsapp } from 'react-icons/fa6'
-import { SITE, whatsappUrl } from '@/config/site'
+import { SITE } from '@/config/site'
 import { piercingPortfolio } from '@/data/gallery'
 import { Seo } from '@/seo/Seo'
-import { Button } from '@/components/ui/Button'
 import { Gallery } from '@/components/ui/Gallery'
-import { NewsletterBand } from '@/components/ui/NewsletterBand'
-import { PageHero } from '@/components/ui/PageHero'
-import { SectionHeading } from '@/components/ui/SectionHeading'
+import { InnerPageTitle } from '@/components/ui/Hero'
+import { ReelsSection } from '@/components/layout/Sections'
+import { SiteFooterExtended } from '@/components/layout/SiteFooter'
 
 export function PiercingPage() {
   return (
     <>
       <Seo path="/piercing" />
-      <PageHero
-        path="/piercing"
-        title="It's Time For a Pierce"
-        lead="The perfect combination of pain and art."
+      <InnerPageTitle
+        id="reviews-page"
+        title="It’s Time For a Pierce"
+        subtitle="The perfect combination of pain and art"
       />
-
-      <section className="section" aria-labelledby="piercing-title">
+      <div id="gallery-1" className="gallery-section division">
         <div className="container">
-          <SectionHeading
-            eyebrow="Safe &middot; Hygienic &middot; Friendly"
-            title={`Professional piercing in ${SITE.address.locality}`}
-            id="piercing-title"
-          >
-            Southern Star Tattoo is a professional piercing and tattoo shop established in{' '}
-            {SITE.foundingYear}. Our experienced team delivers consistent quality and safe, friendly
-            service, and our master artist {SITE.artist.name} holds an NVQ Level 4 qualification in
-            tattoo and piercing.
-          </SectionHeading>
-          <Gallery items={piercingPortfolio} label="Piercing work" />
-          <div className="section-action">
-            <Button href={whatsappUrl('Hello! I want to book a piercing')} external icon={<FaWhatsapp aria-hidden="true" />}>
-              Book a Piercing
-            </Button>
+          <Gallery
+            items={piercingPortfolio}
+            rowClass="row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4"
+            label="Piercing portfolio"
+          />
+          <div className="row">
+            <div className="col">
+              <div className="more-btn">
+                <a
+                  href={SITE.social.instagram.url}
+                  target="_blank"
+                  rel="noopener noreferrer me"
+                  className="btn btn--tra-black hover--black"
+                >
+                  Visit Our Instagram
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
-
-      <NewsletterBand />
+      </div>
+      <ReelsSection />
+      <SiteFooterExtended />
     </>
   )
 }

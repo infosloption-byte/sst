@@ -5,6 +5,7 @@
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import type { AnchorHTMLAttributes, MouseEvent, ReactNode } from 'react'
+import { scrollToTop } from '@/lib/scroll'
 
 interface RouterValue {
   path: string
@@ -51,7 +52,7 @@ export function BrowserRouter({ children }: { children: ReactNode }) {
       window.history.pushState(null, '', next)
       setPath(next)
     }
-    window.scrollTo({ top: 0, left: 0 })
+    scrollToTop()
   }, [])
 
   const value = useMemo<RouterValue>(() => ({ path, navigate }), [path, navigate])

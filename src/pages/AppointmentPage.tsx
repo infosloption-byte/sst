@@ -1,71 +1,76 @@
-import { FaInstagram, FaWhatsapp } from 'react-icons/fa6'
 import { SITE, whatsappUrl } from '@/config/site'
 import { FAQ } from '@/data/content'
 import { Seo } from '@/seo/Seo'
 import { faqSchema } from '@/seo/schema'
-import { Button } from '@/components/ui/Button'
-import { ContactList } from '@/components/ui/ContactList'
-import { Faq } from '@/components/ui/Faq'
-import { HoursTable } from '@/components/ui/HoursTable'
-import { NewsletterBand } from '@/components/ui/NewsletterBand'
-import { PageHero } from '@/components/ui/PageHero'
-import { SectionHeading } from '@/components/ui/SectionHeading'
+import { Accordion } from '@/components/ui/Accordion'
+import { InnerPageHero } from '@/components/ui/Hero'
+import { MapEmbed, ReelsSection } from '@/components/layout/Sections'
+import { SiteFooterExtended } from '@/components/layout/SiteFooter'
 
 export function AppointmentPage() {
   return (
     <>
       <Seo path="/appointment" extra={[faqSchema(FAQ)]} />
-      <PageHero path="/appointment" title="Book an Appointment" />
+      <InnerPageHero
+        id="booking-page"
+        title="Book an Appointment"
+        subtitle={`Please Contact Via WhatsApp ${SITE.phone.display}`}
+      />
 
-      <section className="section" aria-labelledby="book-title">
+      {/* BOOKING: the live site takes bookings on WhatsApp */}
+      <div id="booking-1" className="pt-8 pb-7 booking-section division">
         <div className="container">
-          <SectionHeading
-            id="book-title"
-            eyebrow="The fastest way to book"
-            title={`Please Contact Via WhatsApp ${SITE.phone.display}`}
-          >
-            Tell us what you have in mind and we will help you pick a time. You can also follow our
-            latest work on Instagram.
-          </SectionHeading>
-          <div className="section-action section-action--row">
-            <Button href={whatsappUrl()} external icon={<FaWhatsapp aria-hidden="true" />}>
-              Chat on WhatsApp
-            </Button>
-            <Button
-              href={SITE.social.instagram.url}
-              external
-              variant="outline"
-              icon={<FaInstagram aria-hidden="true" />}
-            >
-              Follow {SITE.social.instagram.handle}
-            </Button>
+          <div className="row justify-content-center">
+            <div className="col-lg-10 col-xl-9 text-center" style={{ background: '#000', padding: '3%' }}>
+              <p className="mb-4">
+                Message us on WhatsApp with the tattoo or piercing you have in mind and we will help you pick a
+                time.
+              </p>
+              <a
+                href={whatsappUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn--gold hover--tra-white"
+              >
+                Chat on WhatsApp
+              </a>
+              <p className="mt-4 mb-0">
+                Prefer to call? <a href={`tel:${SITE.phone.e164}`}>{SITE.phone.display}</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <MapEmbed />
+
+      {/* FAQ */}
+      <section className="pt-8 pb-7 ct-05 content-section" aria-labelledby="faq-title">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-lg-9">
+              <div className="section-title text-center mb-5">
+                <span className="section-id">Before you visit</span>
+                <h2 className="h2-title" id="faq-title">
+                  Frequently Asked Questions
+                </h2>
+              </div>
+              <Accordion
+                single
+                initiallyOpen={[]}
+                items={FAQ.map((item) => ({
+                  id: item.question,
+                  title: item.question,
+                  content: <p className="mb-0">{item.answer}</p>,
+                }))}
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="section section--alt" aria-labelledby="touch-title">
-        <div className="container info-grid info-grid--two">
-          <div className="info-card">
-            <h2 id="touch-title" className="info-card__title">
-              Get in Touch
-            </h2>
-            <ContactList />
-          </div>
-          <div className="info-card">
-            <h2 className="info-card__title">Working Hours</h2>
-            <HoursTable />
-          </div>
-        </div>
-      </section>
-
-      <section className="section" aria-labelledby="faq-title">
-        <div className="container container--narrow">
-          <SectionHeading eyebrow="Before you visit" title="Frequently Asked Questions" id="faq-title" />
-          <Faq items={FAQ} />
-        </div>
-      </section>
-
-      <NewsletterBand />
+      <ReelsSection />
+      <SiteFooterExtended />
     </>
   )
 }

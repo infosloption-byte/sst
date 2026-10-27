@@ -33,6 +33,11 @@ export function businessSchema() {
     },
     areaServed: { '@type': 'City', name: SITE.address.locality },
     hasMap: SITE.mapsUrl,
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: SITE.geo.latitude,
+      longitude: SITE.geo.longitude,
+    },
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',

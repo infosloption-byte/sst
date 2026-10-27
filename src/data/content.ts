@@ -1,25 +1,30 @@
 import { SITE } from '@/config/site'
 
+/** The four style boxes on the home page (icon = class from the original icon font). */
 export const TATTOO_STYLES = [
   {
     name: 'Fine Line',
+    icon: 'flaticon-facial-treatment',
     description:
-      'Very thin, precise and delicate lines, often created with a single needle or a small grouping of needles.',
+      'very thin, precise, and delicate lines, often created mostly using a single needle or a small grouping of needles',
   },
   {
     name: 'Dot Work',
+    icon: 'flaticon-wax',
     description:
-      'Countless tiny dots, meticulously placed and varied in density, form patterns, images, shading effects and textures.',
+      'using countless tiny dots, meticulously placed and varied in density, form patterns, images, shading effects, and textures.',
   },
   {
     name: 'Colored',
+    icon: 'flaticon-cosmetics',
     description:
-      'Pigments beyond black and grey, allowing a wide spectrum of hues, saturation and vibrancy in the design.',
+      'incorporates pigments other than black and grey, allowing for a wide spectrum of hues, saturation, and vibrancy in the design.',
   },
   {
     name: 'Shading',
+    icon: 'flaticon-nail-polish',
     description:
-      'The technique of adding varying tones of ink to create depth, dimension, texture and a sense of realism.',
+      'technique of adding varying tones of ink to create depth, dimension, texture, and a sense of realism within a tattoo design.',
   },
 ] as const
 
@@ -29,8 +34,8 @@ export interface FaqItem {
 }
 
 /**
- * Answers are written only from facts published on the existing website.
- * They render on the Appointment page and feed the FAQPage structured data.
+ * Written only from facts published on the original website. Shown on the
+ * Appointment page and exposed to search engines as FAQPage structured data.
  */
 export const FAQ: readonly FaqItem[] = [
   {
@@ -53,12 +58,12 @@ export const FAQ: readonly FaqItem[] = [
   {
     question: 'Which tattoo styles do you offer?',
     answer:
-      'We are a custom design tattoo studio working in fine line, dot work, colored tattoos and shading, among other styles.',
+      'We are a custom design tattoo studio working in fine line, dot work, colored tattoos and shading, among other styles, including black and grey and Maori-style work.',
   },
   {
     question: 'Can I bring friends or family to my appointment?',
     answer:
-      'Space in the studio is limited, so we ask that you bring one companion only. Friends and family are welcome to meet you after your appointment.',
+      'Our studio is very busy with limited space, so we kindly ask that you limit the people accompanying you to just one. Friends and family are welcome to meet you after your appointment.',
   },
   {
     question: 'How do you look after hygiene and safety?',

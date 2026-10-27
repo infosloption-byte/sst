@@ -2,14 +2,38 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0a0a0b" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#212223" />
+    <meta name="author" content="Southern Star Tattoo" />
+
+    <link rel="icon" href="/assets/front/images/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/front/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/front/images/favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="/assets/front/images/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/assets/front/images/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/assets/front/images/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/front/images/apple-touch-icon-76x76.png" />
     <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Fonts used by the original design -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Vollkorn:wght@400;500;600;700&family=Jost:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Original template styles (bootstrap grid, menu, theme, responsive) -->
+    <link rel="stylesheet" href="/assets/front/css/site.css" />
+    <link rel="preload" href="/assets/front/fonts/flaticond79d.woff2" as="font" type="font/woff2" crossorigin />
+
     <!--app-head-->
   </head>
-  <body>
-    <div id="root"><!--app-html--></div>
+  <body class="theme--dark">
+    <div class="wsmenucontainer">
+      <div id="root"><!--app-html--></div>
+    </div>
     <script type="module" src="/src/entry-client.tsx"></script>
   </body>
 </html>
